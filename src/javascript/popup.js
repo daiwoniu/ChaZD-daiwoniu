@@ -73,7 +73,7 @@ $input.select();
 
 $input.addEventListener("keypress", function (event) {
     if(event.keyCode === 13) {
-            queryInPopup();
+        queryInPopup();
     }
 });
 
@@ -106,7 +106,7 @@ var source = document.querySelector("#source");
 var keySet = document.querySelector("#key-set");
 var score = document.querySelector("#score");
 
-createLink(email, "mailto:ververcpp@gmail.com");
+createLink(email, "mailto:daiwoniu@aliyun.com");
 createLink(source, "https://github.com/daiwoniu/ChaZD-daiwoniu");
 createLink(issue, "https://github.com/daiwoniu/ChaZD-daiwoniu/issues/new");
 createLink(keySet, "chrome://extensions/configureCommands");
@@ -392,20 +392,35 @@ toggleKey.onchange = function (event) {
 // })
 
 //在popup页内 Enter键 查询选中部分
-document.addEventListener("keyup",function(e){
-    if(document.activeElement.tagName=="BODY" && e.which==13){
-        queryInPopup(window.getSelection().toString());
+// document.addEventListener("keyup",function(e){
+//     if(document.activeElement.tagName=="BODY" && e.which==13){
+//         queryInPopup(window.getSelection().toString());
+//     }
+// });
+
+userkey.addEventListener("keypress", function (event) {
+    if(event.keyCode === 13) {
+        localStorage.setItem("chazduserkey",this.value);
+        chrome.storage.local.set({"userkey" : this.value}, function() {
+        });
     }
 });
-userkey.addEventListener("change", function(event){
-    localStorage.setItem("chazduserkey",this.value);
-    chrome.storage.local.set({"userkey" : this.value}, function() {
-        //console.log("[ChaZD] Success update settings userkey = " + this.value);
-    });
+userkeyfrom.addEventListener("keypress", function (event) {
+    if(event.keyCode === 13) {
+        localStorage.setItem("chazduserkeyfrom",this.value);
+        chrome.storage.local.set({"userkeyfrom" : this.value}, function() {
+        });
+    }
 });
-userkeyfrom.addEventListener("change", function(event){
-    localStorage.setItem("chazduserkeyfrom",this.value);
-    chrome.storage.local.set({"userkeyfrom" : this.value}, function() {
-        //console.log("[ChaZD] Success update settings userkeyfrom = " + this.value);
-    });
-});
+// userkey.addEventListener("change", function(event){
+//     localStorage.setItem("chazduserkey",this.value);
+//     chrome.storage.local.set({"userkey" : this.value}, function() {
+//         //console.log("[ChaZD] Success update settings userkey = " + this.value);
+//     });
+// });
+// userkeyfrom.addEventListener("change", function(event){
+//     localStorage.setItem("chazduserkeyfrom",this.value);
+//     chrome.storage.local.set({"userkeyfrom" : this.value}, function() {
+//         //console.log("[ChaZD] Success update settings userkeyfrom = " + this.value);
+//     });
+// });
